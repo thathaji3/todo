@@ -308,7 +308,7 @@ const useTodoStore = create<TodoStore>((set, get) => ({
 
   fetchTodos: async () => {
     try {
-      const res = await fetch("http://localhost:3000/api/todo");
+      const res = await fetch("/api/todo");
       const data = await res.json();
       set({ todos: data });
     } catch (error) {
@@ -318,7 +318,7 @@ const useTodoStore = create<TodoStore>((set, get) => ({
 
   addTodo: async (title, description) => {
     try {
-      const res = await fetch("http://localhost:3000/api/todo", {
+      const res = await fetch("/api/todo", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ title, description }),
@@ -335,7 +335,7 @@ const useTodoStore = create<TodoStore>((set, get) => ({
       const todo = get().todos.find((t) => t.id === id);
       if (!todo) return;
 
-      await fetch(`http://localhost:3000/api/todo/${id}`, {
+      await fetch(`/api/todo/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -357,7 +357,7 @@ const useTodoStore = create<TodoStore>((set, get) => ({
 
   deleteTodo: async (id) => {
     try {
-      await fetch(`http://localhost:3000/api/todo/${id}`, {
+      await fetch(`/api/todo/${id}`, {
         method: "DELETE",
       });
 
@@ -374,7 +374,7 @@ const useTodoStore = create<TodoStore>((set, get) => ({
 
   editTodo: async (id, newTitle, newDescription) => {
     try {
-      await fetch(`http://localhost:3000/api/todo/${id}`, {
+      await fetch(`api/todo/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ title: newTitle, description: newDescription }),
